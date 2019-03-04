@@ -18,15 +18,15 @@ public class SwaggerConfig{
     return new Docket(DocumentationType.SWAGGER_2)
     .apiInfo(apiInfo())
     .select()
-    .apis(RequestHandlerSelectors.basePackage("rtl.tot.corp.mrex.prcn.price.catalog.cmd.mrexprcnpricecatalogcmd.controllers"))
+    .apis(RequestHandlerSelectors.basePackage("rtl.tot.corp.sche.ormg.ordermanagement.ordermanagement.controllers"))
     .paths(paths())
     .build();
 }
 // Describe your apis
 private ApiInfo apiInfo() {
     return new ApiInfoBuilder()
-    .title("ORION TOTTUS PRICE API.")
-    .description("ORION TOTTUS PRICE API.")
+    .title("ORION TOTTUS ORDER API.")
+    .description("ORION TOTTUS ORDER API.")
     .version("1.0-SNAPSHOT")
     .build();
 }
@@ -34,7 +34,7 @@ private ApiInfo apiInfo() {
 private Predicate<String> paths() {
 // Match all paths except /error
     return Predicates.and(
-    PathSelectors.regex("/MREX.*"),
+    PathSelectors.regex("/sche.*"),
     Predicates.not(PathSelectors.regex("/error.*")))
     ;
     }

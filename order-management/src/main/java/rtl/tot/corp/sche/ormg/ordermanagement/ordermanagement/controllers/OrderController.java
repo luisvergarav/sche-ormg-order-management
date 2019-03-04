@@ -22,10 +22,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @RestController
 @RequestMapping("/")
-@Api(value = "ORION", description = "ORION Price Management API")
+@Api(value = "ORION", description = "ORION Order Management API")
 @Slf4j
 @EnableSwagger2
-public class PriceController {
+public class OrderController {
 
 	@Autowired
 	private HttpServletRequest context;
@@ -33,7 +33,7 @@ public class PriceController {
 	private EventProperties eventProperties;
 	
 	@RequestMapping(path = "/sche/ormg/v1.0/order", method = POST)
-	@ApiOperation(value = "Add Price", response = APIResponse.class)
+	@ApiOperation(value = "Create Order", response = APIResponse.class)
 	public ResponseEntity<APIResponse> createProduct(@RequestBody Order request) {
 
 		log.info(context.getHeader("Country") + context.getHeader("Commerce") + context.getHeader("Channel"));
