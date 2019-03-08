@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import rtl.tot.corp.sche.ormg.ordermanagement.domain.model.EventProperties;
 import rtl.tot.corp.sche.ormg.ordermanagement.infraestructure.adapters.http.rest.constants.RestConstants;
 import rtl.tot.corp.sche.ormg.ordermanagement.infraestructure.adapters.http.rest.domain.APIResponse;
-import rtl.tot.corp.sche.ormg.ordermanagement.infraestructure.adapters.http.rest.domain.Order;
+import rtl.tot.corp.sche.ormg.ordermanagement.infraestructure.adapters.http.rest.domain.CustomerOrder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @RestController
@@ -34,7 +34,7 @@ public class OrderController {
 	
 	@RequestMapping(path = "/sche/ormg/v1.0/order", method = POST)
 	@ApiOperation(value = "Create Order", response = APIResponse.class)
-	public ResponseEntity<APIResponse> createProduct(@RequestBody Order request) {
+	public ResponseEntity<APIResponse> createProduct(@RequestBody CustomerOrder request) {
 
 		log.info(context.getHeader("Country") + context.getHeader("Commerce") + context.getHeader("Channel"));
 
@@ -57,14 +57,14 @@ public class OrderController {
 		try {
 
 			if (true)
-				log.info("Order Created successful ", request.getOrderId());
+				log.info("Order Created successful ", request.getFolios().getOrderId());
 			else {
-				log.info("Order not Created ", request.getOrderId());
+				log.info("Order not Created ", request.getFolios().getOrderId());
 				return new ResponseEntity<APIResponse>(this.buildErrorRes("Orden not Created"), HttpStatus.BAD_REQUEST);
 			}
 		} catch (Exception e) {
 
-			log.debug("Order Created Exception ", request.getOrderId());
+			log.debug("Order Created Exception ", request.getFolios().getOrderId());
 			return new ResponseEntity<APIResponse>(this.buildErrorRes(e.getLocalizedMessage()), HttpStatus.BAD_REQUEST);
 		}
 
