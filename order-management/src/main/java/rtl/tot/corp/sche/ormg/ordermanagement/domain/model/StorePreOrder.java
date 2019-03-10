@@ -8,17 +8,10 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class Reserve {
-	@NotNull
-	String orderId;
-	List<Reserve.Dispatch> dispatch = new ArrayList<Reserve.Dispatch>();
-    
-	@Data
-	public class Dispatch{
+	public class StorePreOrder extends PreOrder{
 	@NotNull
 	Integer store;
 	@NotNull
 	String dateDispatch;
 	List<Sku> sku = new ArrayList<Sku>();
 	}
-}

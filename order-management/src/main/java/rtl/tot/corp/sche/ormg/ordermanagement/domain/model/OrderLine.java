@@ -8,17 +8,9 @@ import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 
 import lombok.Data;
- 
-@Data
-public class CustomerOrder {
-	@Id
-	@NotNull
-	String orderId;
-	@NotNull
-	String customerID;
-	@NotNull
-	String status;
-	@NotNull
-	List<OrderLine> orderLine = new ArrayList<OrderLine>();
-}
 
+@Data
+public class OrderLine {
+	PickingCenter pc;
+	List<PreOrder> preOrderList = new ArrayList<PreOrder>();
+}

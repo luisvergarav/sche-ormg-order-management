@@ -9,7 +9,7 @@ import javax.validation.constraints.Null;
 import lombok.Data;
 
 @Data
-public class Dispatch{
+public class WarehousePreOrder extends PreOrder{
 		@NotNull
 		Integer dispatchWh;
 		@NotNull

@@ -16,12 +16,12 @@ public OrderService(OrderRepository repository) {
 	this.repository = repository;
 }
 
-public boolean addProduct(OrderAggregate orderAgg){
+public boolean createOrder(OrderAggregate orderAgg){
 	
 	CustomerOrder order = new CustomerOrder();
-	order.folios.setOrderId(orderAgg.productRootentity.getSku());
+	order.setOrderId(orderAgg.orderRootEntity.getOrderId());
 	
-	//this.repository.save(product);
+	this.repository.save(order);
 	log.info("Customer Order Saved successful ", order);
 	return true;
 		

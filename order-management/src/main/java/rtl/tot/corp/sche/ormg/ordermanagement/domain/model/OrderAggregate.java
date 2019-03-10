@@ -3,37 +3,20 @@ package rtl.tot.corp.sche.ormg.ordermanagement.domain.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
+import org.springframework.data.annotation.Id;
+
 public class OrderAggregate {
 
-	final OrderRootEntity  productRootentity;
+	final OrderRootEntity  orderRootEntity;
 	
 	public OrderAggregate(Builder builder) {
-		this.productRootentity = new OrderRootEntity(
-				builder.sku,
-				builder.description,
-				builder.levelId,
-				builder.brand,
-				builder.model,
-				builder.productType,
+		this.orderRootEntity = new OrderRootEntity(
+				builder.orderId,
+				builder.customerID,
 				builder.status,
-				builder.ean,
-				builder.unitMeasure,
-				builder.saleUnit,
-				builder.posDescription,
-				builder.flejeDescription,
-				builder.codeSupplier,
-				builder.nameSupplier,
-				builder.qtyCasePack,
-				builder.nameCasePack,
-				builder.codeSUNAT,
-				builder.eanSecundary,
-				builder.hierarchy,
-				builder.logisticAttributes,
-				builder.conservation,
-				builder.assortment,
-				builder.attribute
-				
-				
+				builder.orderLine
 				);
 		
 	}
@@ -42,185 +25,54 @@ public class OrderAggregate {
 		return true;
 	}
 	
-	public boolean addProduct(OrderService service) {
-		return service.addProduct(this);
+	public boolean createOrder(OrderService service) {
+		return service.createOrder(this);
 	}
 	
 	
-	public boolean updateProduct(OrderService service) {
-		return service.addProduct(this);
-	}
-	
+
 	public static class Builder{
 		
-		String sku;
+		String orderId;
 		
-		String description;
+		String customerID;
+
+		String status;	
 		
-		Long levelId;
+		List<OrderLine> orderLine = new ArrayList <OrderLine>();
 		
-		String brand;
-		
-		String model;
-		
-		String productType;
-		
-		String status;
-		
-		Long ean;
-		
-		String unitMeasure;
-		
-		String saleUnit;
-		
-		String posDescription;
-		
-		String flejeDescription;
-		
-		Integer codeSupplier;
-		
-		String nameSupplier;
-		
-		String qtyCasePack;
-		
-		String nameCasePack;
-		
-		String codeSUNAT;
-		
-		List <EanSecundary> eanSecundary = new ArrayList <EanSecundary>();
-		
-		Hierarchy hierarchy = new Hierarchy();
-		
-		LogisticAttributes logisticAttributes = new LogisticAttributes();
-		
-		Conservation conservation = new Conservation();
-		
-		Assortment assortment = new Assortment();
-		
-		List <Attribute> attribute = new ArrayList<Attribute>();
 		
 		public OrderAggregate build() {
 			
 			return new OrderAggregate(this);
 		}
-		public Builder sku(String sku) {
-			this.sku = sku;
+
+
+		public Builder setOrderId(String orderId) {
+			this.orderId = orderId;
 			return this;
 		}
 
-		
-		public Builder setDescription(String description) {
-			this.description = description;
+
+		public Builder setCustomerID(String customerID) {
+			this.customerID = customerID;
 			return this;
 		}
-		
-		public Builder setLevelId(Long levelId) {
-			this.levelId = levelId;
-			return this;
-		}
-		
-		public Builder setBrand(String brand) {
-			this.brand = brand;
-			return this;
-		}
-		
-		public Builder setModel(String model) {
-			this.model = model;
-			return this;
-		}
-		
-		public Builder setProductType(String productType) {
-			this.productType = productType;
-			return this;
-		}
-		
+
+
 		public Builder setStatus(String status) {
 			this.status = status;
 			return this;
 		}
-		
-		public Builder setEan(Long ean) {
-			this.ean = ean;
-			return this;
-		}
-		
-		public Builder setUnitMeasure(String unitMeasure) {
-			this.unitMeasure = unitMeasure;
-			return this;
-		}
-		
-		public Builder setSaleUnit(String saleUnit) {
-			this.saleUnit = saleUnit;
-			return this;
-		}
-		
-		public Builder setPosDescription(String posDescription) {
-			this.posDescription = posDescription;
-			return this;
-		}
-		
-		public Builder setFlejeDescription(String flejeDescription) {
-			this.flejeDescription = flejeDescription;
-			return this;
-		}
-		
-		public Builder setCodeSupplier(Integer codeSupplier) {
-			this.codeSupplier = codeSupplier;
-			return this;
-		}
-		
-		public Builder setNameSupplier(String nameSupplier) {
-			this.nameSupplier = nameSupplier;
-			return this;
-		}
-		
-		public Builder setQtyCasePack(String qtyCasePack) {
-			this.qtyCasePack = qtyCasePack;
-			return this;
-		}
-		
-		public Builder setNameCasePack(String nameCasePack) {
-			this.nameCasePack = nameCasePack;
-			return this;
-		}
-		
-		public Builder setCodeSUNAT(String codeSUNAT) {
-			this.codeSUNAT = codeSUNAT;
-			return this;
-		}
-		
-		public Builder setEanSecundary(List<EanSecundary> eanSecundary) {
-			this.eanSecundary = eanSecundary;
-			return this;
-		}
-		
-		public Builder setHierarchy(Hierarchy hierarchy) {
-			this.hierarchy = hierarchy;
-			return this;
-		}
-		
-		public Builder setLogisticAttributes(LogisticAttributes logisticAttributes) {
-			this.logisticAttributes = logisticAttributes;
-			return this;
-		}
-		
-		public Builder setConservation(Conservation conservation) {
-			this.conservation = conservation;
-			return this;
-		}
-		
-		public Builder setAssortment(Assortment assortment) {
-			this.assortment = assortment;
-			return this;
-		}
-		
-		public Builder setAttribute(List<Attribute> attribute) {
-			this.attribute = attribute;
-			return this;
-		}
 
 
+		public Builder orderLine(List<OrderLine> orderLine) {
+			this.orderLine = orderLine;
+			return this;
+		}
+		
 
+		
 		
 	}
 }

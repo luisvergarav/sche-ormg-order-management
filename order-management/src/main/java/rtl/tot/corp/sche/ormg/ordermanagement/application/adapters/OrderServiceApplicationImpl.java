@@ -2,10 +2,6 @@ package rtl.tot.corp.sche.ormg.ordermanagement.application.adapters;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import rtl.tot.corp.ecom.pctm.product.productcatalogcmd.domain.model.Assortment;
-import rtl.tot.corp.ecom.pctm.product.productcatalogcmd.domain.model.ProductAggregate;
-import rtl.tot.corp.ecom.pctm.product.productcatalogcmd.domain.model.ProductService;
 import rtl.tot.corp.sche.ormg.ordermanagement.domain.model.OrderAggregate;
 import rtl.tot.corp.sche.ormg.ordermanagement.domain.model.OrderService;
 
@@ -20,9 +16,10 @@ public class OrderServiceApplicationImpl {
 		
 		
 		aggregate = new  OrderAggregate.Builder()
-				.sku(cmd.getSku())
+				.setOrderId(cmd.getFolios().getOrderId())
+				.setStatus("orderCreated")
 				.build();
-		if (this.aggregate.addProduct(service))
+		if (this.aggregate.createOrder(service))
 			return true;
 		else
 			return false;
