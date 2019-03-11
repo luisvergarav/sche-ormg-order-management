@@ -16,13 +16,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import rtl.tot.corp.sche.ormg.ordermanagement.domain.model.EventDomain;
 
+
 @Data
 @JsonIgnoreProperties({"mapper", "entityType"})
 public class OrderCreatedIntegrationEvent  implements EventDomain {
+	@Id
 	@NotNull
-	Folios folios;
+	String orderId;
 	@NotNull
-	Reserve reserve;
+	String customerID;
+	@NotNull
+	String status;
+	@NotNull
+	List<OrderLine> orderLine = new ArrayList<OrderLine>();
 	
 	private final ObjectMapper mapper = new ObjectMapper();
 	 
@@ -31,7 +37,7 @@ public class OrderCreatedIntegrationEvent  implements EventDomain {
 	@JsonIgnore
 	public String getEntityId() {
 		// TODO Auto-generated method stub
-		return folios.getOrderId();
+		return orderId;
 	}
 
 	@Override
