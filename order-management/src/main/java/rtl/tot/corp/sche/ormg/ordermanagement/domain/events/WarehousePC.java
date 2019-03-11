@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 import lombok.Data;
 
 @Data
-public class Folios {
+public class WarehousePC extends PickingCenter {
 	@Id
 	@NotNull
 	String orderId;
@@ -18,10 +18,9 @@ public class Folios {
 	Integer folioComuna;
 	@NotNull
 	String observation;
+	
 	@NotNull
-	List<Dispatch> dispatch = new ArrayList<Dispatch>();
+	Purchaser purchaser = new Purchaser();
 	@NotNull
-	Purchaser purchaser;
-	@NotNull
-	Receiver receiver;
+	Receiver receiver = new Receiver();
 }
