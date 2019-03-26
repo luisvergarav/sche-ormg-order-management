@@ -1,9 +1,11 @@
 package rtl.tot.corp.sche.ormg.ordermanagement.domain.model;
 
 public enum EventType {
-    ORDER_CREATED("productCreated"),
-    ORDER_UPDATED("productUpdated"),
-    ORDER_DELETED("productDeleted");
+    ORDER_CREATED("orderCreated"),
+    ORDER_PROCESSED("orderProcessed"),
+    ORDER_READYTODISPATCH("orderReadyToDispatch"),
+    PC_ORDERSTATUS_CHANGED("PCOrderStatusChanged"),
+    WH_ORDERSTATUS_CHANGED("WHOrderStatusChanged");
     private final String name;
 
     EventType(final String name) {

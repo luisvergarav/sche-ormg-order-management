@@ -9,8 +9,7 @@ import lombok.Data;
 
 @Data
 public class Folios {
-	@NotNull
-	String orderId;
+	
 	@NotNull
 	Integer folioComuna;
 	@NotNull

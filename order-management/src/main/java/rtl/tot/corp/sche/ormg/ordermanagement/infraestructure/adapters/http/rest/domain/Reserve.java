@@ -14,7 +14,7 @@ public class Reserve {
 	List<Reserve.Dispatch> dispatch = new ArrayList<Reserve.Dispatch>();
     
 	@Data
-	public class Dispatch{
+	public static class Dispatch{
 	@NotNull
 	Integer store;
 	@NotNull

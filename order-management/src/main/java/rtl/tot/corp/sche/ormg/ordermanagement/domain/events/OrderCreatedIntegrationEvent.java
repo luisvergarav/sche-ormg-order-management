@@ -24,6 +24,8 @@ public class OrderCreatedIntegrationEvent  implements EventDomain {
 	@NotNull
 	String orderId;
 	@NotNull
+	Integer orderType;
+	@NotNull
 	String customerID;
 	@NotNull
 	String status;

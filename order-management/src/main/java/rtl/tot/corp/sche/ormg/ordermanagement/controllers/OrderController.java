@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import rtl.tot.corp.sche.ormg.ordermanagement.application.adapters.CreateOrderCommandImpl;
+import rtl.tot.corp.sche.ormg.ordermanagement.application.adapters.DecoratorCreateOrderCommandBus;
 import rtl.tot.corp.sche.ormg.ordermanagement.domain.model.EventProperties;
 import rtl.tot.corp.sche.ormg.ordermanagement.infraestructure.adapters.http.rest.constants.RestConstants;
 import rtl.tot.corp.sche.ormg.ordermanagement.infraestructure.adapters.http.rest.domain.APIResponse;
@@ -31,7 +33,10 @@ public class OrderController {
 	private HttpServletRequest context;
 	@Autowired
 	private EventProperties eventProperties;
-	
+
+	@Autowired
+	private DecoratorCreateOrderCommandBus cmdBus;
+
 	@RequestMapping(path = "/sche/ormg/v1.0/order", method = POST)
 	@ApiOperation(value = "Create Order", response = APIResponse.class)
 	public ResponseEntity<APIResponse> createProduct(@RequestBody CustomerOrder request) {
@@ -56,15 +61,19 @@ public class OrderController {
 		log.info("Create Order request.", request);
 		try {
 
-			if (true)
-				log.info("Order Created successful ", request.getFolios().getOrderId());
-			else {
-				log.info("Order not Created ", request.getFolios().getOrderId());
-				return new ResponseEntity<APIResponse>(this.buildErrorRes("Orden not Created"), HttpStatus.BAD_REQUEST);
-			}
+
+				CreateOrderCommandImpl cmd = new CreateOrderCommandImpl(request);
+
+				if (cmdBus.execute(cmd))
+					log.info("Order Created successful %s ", request.getOrderId());
+				else {
+					log.info("Order not Created ", request.getOrderId());
+					return new ResponseEntity<APIResponse>(this.buildErrorRes("Order not Created"), HttpStatus.BAD_REQUEST);
+				}
+			
 		} catch (Exception e) {
 
-			log.debug("Order Created Exception ", request.getFolios().getOrderId());
+			log.debug("Order Created Exception ", request.getOrderId());
 			return new ResponseEntity<APIResponse>(this.buildErrorRes(e.getLocalizedMessage()), HttpStatus.BAD_REQUEST);
 		}
 

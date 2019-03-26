@@ -13,13 +13,20 @@ import rtl.tot.corp.sche.ormg.ordermanagement.infraestructure.adapters.http.rest
 public class CreateOrderCommandImpl implements CreateOrderCommand<CustomerOrder> {
 
 	@NotNull
-	Folios folios;
+	Integer orderType;
 	@NotNull
-	Reserve reserve;
+	String orderId;
+	@NotNull
+	Folios folios = new Folios();
+	@NotNull
+	Reserve reserve = new Reserve();
 
 	public CreateOrderCommandImpl(CustomerOrder request) {
+		
+		this.setOrderId(request.getOrderId());
+		this.setOrderType(request.getOrderType());
+		
 		if (request.getReserve() != null) {
-			this.reserve.setOrderId(request.getReserve().getOrderId());
 			for (rtl.tot.corp.sche.ormg.ordermanagement.infraestructure.adapters.http.rest.domain.Reserve.Dispatch dispatch : request
 					.getReserve().getDispatch()) {
 				rtl.tot.corp.sche.ormg.ordermanagement.application.adapters.model.Reserve.Dispatch newDispatch = new rtl.tot.corp.sche.ormg.ordermanagement.application.adapters.model.Reserve
@@ -39,7 +46,7 @@ public class CreateOrderCommandImpl implements CreateOrderCommand<CustomerOrder>
 		if (request.getFolios() != null) {
 			this.folios.setFolioComuna(request.getFolios().getFolioComuna());
 			this.folios.setObservation(request.getFolios().getObservation());
-			this.folios.setOrderId(request.getFolios().getOrderId());
+			
 			if (request.getFolios().getPurchaser() != null) {
 				this.folios.getPurchaser().setCustomerAddress(request.getFolios().getPurchaser().getCustomerAddress());
 				this.folios.getPurchaser()

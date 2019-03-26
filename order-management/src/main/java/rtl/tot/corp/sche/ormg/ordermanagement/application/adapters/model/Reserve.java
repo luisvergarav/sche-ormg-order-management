@@ -9,8 +9,7 @@ import lombok.Data;
 
 @Data
 public class Reserve {
-	@NotNull
-	String orderId;
+	
 	List<Reserve.Dispatch> dispatch = new ArrayList<Reserve.Dispatch>();
     
 	@Data

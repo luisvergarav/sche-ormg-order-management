@@ -11,9 +11,7 @@ import lombok.Data;
 
 @Data
 public class WarehousePC extends PickingCenter {
-	@Id
-	@NotNull
-	String orderId;
+
 	@NotNull
 	Integer folioComuna;
 	@NotNull

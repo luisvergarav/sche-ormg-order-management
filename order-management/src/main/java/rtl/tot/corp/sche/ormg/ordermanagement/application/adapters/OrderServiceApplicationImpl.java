@@ -16,7 +16,7 @@ public class OrderServiceApplicationImpl {
 		
 		
 		aggregate = new  OrderAggregate.Builder()
-				.setOrderId(cmd.getFolios().getOrderId())
+				.setOrderId(cmd.getOrderId())
 				.setStatus("orderCreated")
 				.build();
 		if (this.aggregate.createOrder(service))

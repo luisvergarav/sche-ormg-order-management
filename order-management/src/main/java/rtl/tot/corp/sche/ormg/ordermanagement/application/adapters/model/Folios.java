@@ -9,8 +9,7 @@ import lombok.Data;
 
 @Data
 public class Folios {
-	@NotNull
-	String orderId;
+
 	@NotNull
 	Integer folioComuna;
 	@NotNull
@@ -18,7 +17,7 @@ public class Folios {
 	@NotNull
 	List<Dispatch> dispatch = new ArrayList<Dispatch>();
 	@NotNull
-	Purchaser purchaser;
+	Purchaser purchaser = new Purchaser();
 	@NotNull
-	Receiver receiver;
+	Receiver receiver = new Receiver();
 }

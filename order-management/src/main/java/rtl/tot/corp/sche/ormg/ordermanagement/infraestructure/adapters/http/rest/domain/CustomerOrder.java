@@ -7,6 +7,10 @@ import lombok.Data;
 @Data
 public class CustomerOrder {
 	@NotNull
+	Integer orderType;
+	@NotNull
+	String orderId;
+	@NotNull
 	Folios folios;
 	@NotNull
 	Reserve reserve;

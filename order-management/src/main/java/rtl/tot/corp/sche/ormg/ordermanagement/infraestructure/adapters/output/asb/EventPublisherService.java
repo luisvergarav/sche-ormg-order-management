@@ -6,6 +6,7 @@ import corp.falabella.arq.event.provider.EventPublisher;
 import corp.falabella.arq.infra.exception.InvalidParameterException;
 import lombok.extern.slf4j.Slf4j;
 import rtl.tot.corp.sche.ormg.ordermanagement.domain.model.EventDomain;
+import rtl.tot.corp.sche.ormg.ordermanagement.domain.model.EventProperties;
 import rtl.tot.corp.sche.ormg.ordermanagement.domain.model.EventType;
 
 import org.springframework.beans.factory.annotation.Autowired;

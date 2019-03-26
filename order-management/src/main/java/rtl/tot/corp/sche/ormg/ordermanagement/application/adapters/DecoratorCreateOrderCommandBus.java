@@ -1,6 +1,8 @@
 package rtl.tot.corp.sche.ormg.ordermanagement.application.adapters;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import lombok.extern.slf4j.Slf4j;
 import rtl.tot.corp.sche.ormg.ordermanagement.domain.events.OrderCreatedIntegrationEvent;
 import rtl.tot.corp.sche.ormg.ordermanagement.domain.events.OrderLine;
@@ -14,6 +16,7 @@ import rtl.tot.corp.sche.ormg.ordermanagement.domain.ports.CommandBus;
 import rtl.tot.corp.sche.ormg.ordermanagement.infraestructure.adapters.http.rest.domain.Dispatch;
 import rtl.tot.corp.sche.ormg.ordermanagement.infraestructure.adapters.output.asb.EventPublisherService;
 
+@Component
 @Slf4j
 public class DecoratorCreateOrderCommandBus implements CommandBus<CreateOrderCommandImpl> {
 
@@ -35,12 +38,14 @@ public class DecoratorCreateOrderCommandBus implements CommandBus<CreateOrderCom
     	        
     	        integrationEvent = new OrderCreatedIntegrationEvent();
     	        integrationEvent.setStatus("orderCreated");
+
+				integrationEvent.setOrderId(command.getOrderId());
+
+				integrationEvent.setOrderType(command.getOrderType());
     	        if (command.getReserve() != null) {
-    				integrationEvent.setOrderId(command.getReserve().getOrderId());
     				OrderLine orderLine = new OrderLine();
         			
     				StorePC spc = new StorePC();
-					spc.setOrderId(command.getReserve().getOrderId());
 					orderLine.setPc(spc);
 					
     				for (rtl.tot.corp.sche.ormg.ordermanagement.application.adapters.model.Reserve.Dispatch dispatch : command
@@ -66,11 +71,9 @@ public class DecoratorCreateOrderCommandBus implements CommandBus<CreateOrderCom
     				}
     			}
     			if (command.getFolios() != null) {
-    				integrationEvent.setOrderId(command.getReserve().getOrderId());
     				OrderLine orderLine = new OrderLine();
         		
     				WarehousePC whpc = new WarehousePC();
-					whpc.setOrderId(command.getReserve().getOrderId());
 					whpc.setFolioComuna(command.getFolios().getFolioComuna());
 					whpc.setObservation(command.getFolios().getObservation());
 					
@@ -138,7 +141,7 @@ public class DecoratorCreateOrderCommandBus implements CommandBus<CreateOrderCom
     	        
     			}
     	        if  (this.bus.execute(command)) {
-    	            log.info("Sending OrderCreateEvent integration Event " , command.getFolios().getOrderId());
+    	            log.info("Sending OrderCreateEvent integration Event %s" , command.getOrderId());
     	       	 
     	        	return publisher.publish(EventType.ORDER_CREATED, integrationEvent);
     				   	        
