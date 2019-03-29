@@ -26,8 +26,6 @@ public class OrderCreatedIntegrationEvent  implements EventDomain {
 	@NotNull
 	Integer orderType;
 	@NotNull
-	String customerID;
-	@NotNull
 	String status;
 	@NotNull
 	List<OrderLine> orderLine = new ArrayList<OrderLine>();

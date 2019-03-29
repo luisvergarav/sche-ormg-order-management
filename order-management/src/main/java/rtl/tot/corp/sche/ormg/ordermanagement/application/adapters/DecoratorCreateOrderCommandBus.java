@@ -37,10 +37,9 @@ public class DecoratorCreateOrderCommandBus implements CommandBus<CreateOrderCom
     	       
     	        
     	        integrationEvent = new OrderCreatedIntegrationEvent();
-    	        integrationEvent.setStatus("orderCreated");
-
+    	        
 				integrationEvent.setOrderId(command.getOrderId());
-
+				integrationEvent.setStatus(EventType.ORDER_CREATED.toString());
 				integrationEvent.setOrderType(command.getOrderType());
     	        if (command.getReserve() != null) {
     				OrderLine orderLine = new OrderLine();

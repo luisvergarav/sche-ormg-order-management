@@ -6,9 +6,12 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import lombok.Data;
 
 @Data
+@JsonTypeName("WarehousePreOrder")
 public class WarehousePreOrder extends PreOrder{
 		@NotNull
 		Integer dispatchWh;
