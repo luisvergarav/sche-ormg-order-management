@@ -1,7 +1,14 @@
-HELP.md
 .gradle
 /build/
+/bin/
+
+# Ignore Gradle GUI config
+gradle-app.setting
 !gradle/wrapper/gradle-wrapper.jar
+
+
+# Cache of project
+.gradletasknamecache
 
 ### STS ###
 .apt_generated
